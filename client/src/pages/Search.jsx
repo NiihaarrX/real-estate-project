@@ -127,19 +127,20 @@ export default function Search() {
     }
     setListings([...listings, ...data]);
   };
+
   return (
-    <div className='flex flex-col md:flex-row'>
-      <div className='p-7  border-b-2 md:border-r-2 md:min-h-screen'>
+    <div className='flex flex-col md:flex-row bg-gray-50'>
+      {/* Sidebar */}
+      <div className='p-7 border-b-2 md:border-r-2 md:min-h-screen bg-white'>
+        <h2 className='text-2xl font-semibold text-slate-700 mb-5'>Search Listings</h2>
         <form onSubmit={handleSubmit} className='flex flex-col gap-8'>
           <div className='flex items-center gap-2'>
-            <label className='whitespace-nowrap font-semibold'>
-              Search Term:
-            </label>
+            <label className='whitespace-nowrap font-semibold'>Search Term:</label>
             <input
               type='text'
               id='searchTerm'
               placeholder='Search...'
-              className='border rounded-lg p-3 w-full'
+              className='border rounded-lg p-3 w-full focus:outline-none focus:ring focus:ring-blue-500'
               value={sidebardata.searchTerm}
               onChange={handleChange}
             />
@@ -219,7 +220,7 @@ export default function Search() {
               className='border rounded-lg p-3'
             >
               <option value='regularPrice_desc'>Price high to low</option>
-              <option value='regularPrice_asc'>Price low to hight</option>
+              <option value='regularPrice_asc'>Price low to high</option>
               <option value='createdAt_desc'>Latest</option>
               <option value='createdAt_asc'>Oldest</option>
             </select>
@@ -229,6 +230,7 @@ export default function Search() {
           </button>
         </form>
       </div>
+      {/* Listings Section */}
       <div className='flex-1'>
         <h1 className='text-3xl font-semibold border-b p-3 text-slate-700 mt-5'>
           Listing results:
