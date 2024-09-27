@@ -8,15 +8,37 @@ export default function SignUp() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+
+  const checkPasswordStrength = (password) => {
+    const isLongEnough = password.length >= 8;
+    const hasLetters = /[a-zA-Z]/.test(password);
+    const hasNumbers = /\d/.test(password);
+
+    if (!isLongEnough) {
+      return "Password must be at least 8 characters long.";
+    }
+    if (!hasLetters || !hasNumbers) {
+      return "Password must contain both letters and numbers.";
+    }
+    return null;
+  };
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.id]: e.target.value,
     });
+
+
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const passwordError = checkPasswordStrength(formData.password);
+    if (passwordError) {
+      setError(passwordError);
+      return;
+    }
     try {
       setLoading(true);
       const res = await fetch('/api/auth/signup', {
