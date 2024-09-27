@@ -52,11 +52,14 @@ const userSlice = createSlice({
       signOutUserSuccess: (state) => {
         state.currentUser = null;
         state.loading = false;
-        state.error = null;
+        state.error = action.payload;
       },
       signOutUserFailure: (state, action) => {
         state.error = action.payload;
         state.loading = false;
+      },
+      clearError: (state) => {
+        state.error = null; 
       },
     }
 });
@@ -73,7 +76,8 @@ export const {
   deleteUserFailure,
   signOutUserStart,
   signOutUserFailure,
-  signOutUserSuccess
+  signOutUserSuccess,
+  clearError
 } = userSlice.actions;
 
 export default userSlice.reducer;
